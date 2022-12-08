@@ -2,6 +2,11 @@ package hello.core.member;
 
 public class MemberServiceImpl implements MemberService {
 
+    // 테스트용
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     private final MemberRepository memberRepository;
 
     public MemberServiceImpl(MemberRepository memberRepository) {
@@ -17,4 +22,6 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
     }
+
+
 }

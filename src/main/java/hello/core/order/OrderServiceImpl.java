@@ -8,6 +8,11 @@ import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
+    // 테스트용
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
