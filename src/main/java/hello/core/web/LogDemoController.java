@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
     @RequestMapping("log-demo")
     @ResponseBody // view 없이 단순 문자열 반
@@ -22,7 +22,7 @@ public class LogDemoController {
     public String logDemo(HttpServletRequest request){
         String requestURL = request.getRequestURL().toString();
 
-        MyLogger myLogger = myLoggerProvider.getObject();
+        System.out.println("myLogger = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
         myLogger.log("controller test");
         logDemoService.logic("testId");
