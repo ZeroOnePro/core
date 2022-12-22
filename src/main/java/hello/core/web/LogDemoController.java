@@ -2,6 +2,7 @@ package hello.core.web;
 
 import hello.core.common.MyLogger;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,15 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final MyLogger myLogger;
+    private final ObjectProvider<MyLogger> myLoggerProvider;
 
     @RequestMapping("log-demo")
     @ResponseBody // view 없이 단순 문자열 반
     // HttpServletRequest 는 자바에서 제공하는 표준 서블릿 규약에 따라 HTTP 요청을 받게한다
     public String logDemo(HttpServletRequest request){
         String requestURL = request.getRequestURL().toString();
-        myLogger.setRequestURL(requestURL);
 
+        MyLogger myLogger = myLoggerProvider.getObject();
+        myLogger.setRequestURL(requestURL);
         myLogger.log("controller test");
         logDemoService.logic("testId");
 
